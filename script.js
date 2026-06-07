@@ -970,6 +970,21 @@ const practiceProblems = [
     ],
     followUp: "Can you minimize the total number of operations?",
   },
+  {
+    id: 18,
+    title: "Valid Anagram",
+    difficulty: "easy",
+    tags: ["Strings", "Hash Table"],
+    acceptance: "63.4%",
+    category: "strings",
+    description:
+      "Given two strings s and t, return true if t is an anagram of s, and false otherwise. An anagram is a word or phrase formed by rearranging the letters of a different word or phrase, using all the original letters exactly once.",
+    constraints: [
+      "1 ≤ s.length, t.length ≤ 5 × 10⁴",
+      "s and t consist of lowercase English letters only",
+    ],
+    followUp: "What if the inputs contain Unicode characters? How would you adapt your solution?",
+  },
 ];
 
 const dailyChallenges = [
@@ -3681,11 +3696,16 @@ function generateExamples(problem) {
         <strong>Edge Cases:</strong><br>• Single element → 0 (can't sell)<br>• All same prices → 0<br>• Minimum at the very end → 0<br><br>
         <strong>Follow-up:</strong> Can you solve it in O(n) time and O(1) space using a greedy approach (track the minimum price so far)?`,
 
-    16: `<strong>Example 1:</strong><br>Input: nums = [0,1,0,3,12]<br>Output: [1,3,12,0,0]<br>Explanation: All non-zero elements keep their relative order and zeroes move to the end.<br><br>
+    17: `<strong>Example 1:</strong><br>Input: nums = [0,1,0,3,12]<br>Output: [1,3,12,0,0]<br>Explanation: All non-zero elements keep their relative order and zeroes move to the end.<br><br>
         <strong>Example 2:</strong><br>Input: nums = [0]<br>Output: [0]<br><br>
         <strong>Example 3:</strong><br>Input: nums = [1,2,3]<br>Output: [1,2,3]<br>Explanation: No zeroes — array is unchanged.<br><br>
         <strong>Edge Cases:</strong><br>• All zeroes → same array<br>• No zeroes → unchanged<br>• Single element → unchanged<br><br>
         <strong>Follow-up:</strong> Can you do it with a single pass using the two-pointer technique to minimize writes?`,
+    18: `<strong>Example 1:</strong><br>Input: s = "anagram", t = "nagaram"<br>Output: true<br>Explanation: Both strings contain the same characters with the same frequencies.<br><br>
+        <strong>Example 2:</strong><br>Input: s = "rat", t = "car"<br>Output: false<br>Explanation: 'r','a','t' vs 'c','a','r' — different character sets.<br><br>
+        <strong>Example 3:</strong><br>Input: s = "a", t = "a"<br>Output: true<br><br>
+        <strong>Edge Cases:</strong><br>• Different lengths → always false<br>• Single character strings<br>• Strings with repeated characters<br><br>
+        <strong>Follow-up:</strong> Can you solve it in O(n) using a Hash Map instead of sorting?`,
   };
   return (
     examples[problem.id] || "<strong>Example:</strong><br>Solve this problem"
