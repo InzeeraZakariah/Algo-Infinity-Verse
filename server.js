@@ -112,6 +112,7 @@ const mimeTypes = {
   ".png": "image/png",
   ".svg": "image/svg+xml",
   ".webp": "image/webp",
+  ".php": "text/html; charset=utf-8",
 };
 
 async function loadEnvFile() {
@@ -539,6 +540,16 @@ function resolveStaticPath(pathname) {
     "/dbms-learning": "dbms-learning.html",
     "/powerbi-learning": "powerbi-learning.html",
     "/cplusplus-learning": "cplusplus-learning.html",
+    "/learning/php": "php-learning.html",
+    "/php-learning": "php-learning.html",
+    "/learning/oop": "oop-learning.html",
+    "/oop-learning": "oop-learning.html",
+    "/learning/computer-architecture": "computer-architecture.html",
+    "/computer-architecture": "computer-architecture.html",
+    "/learning/tree-traversal": "tree-traversal.html",
+    "/tree-traversal": "tree-traversal.html",
+    "/learning/visualizer/graph": "graph-visualizer.html",
+    "/graph-visualizer": "graph-visualizer.html",
     "/feedback": "feedback.html",
     "/feedback.html": "feedback.html",
     "/support-page": "support-page/index.html",
