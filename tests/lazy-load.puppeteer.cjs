@@ -3,8 +3,6 @@ const path = require('path');
 
 async function runTests() {
     console.log("Starting Puppeteer tests for lazy loading...");
-async function runTests() {
-    console.log("Starting Puppeteer tests for lazy loading...");
     const browser = await puppeteer.launch({ headless: 'new' });
     try {
         const page = await browser.newPage();
@@ -17,8 +15,8 @@ async function runTests() {
         console.log("\n--- Checking initial state (offscreen) ---");
         
         // Check IntersectionObserver image
-        let ioImgSrc = await page.$eval('`#io-lazy-img`', el => el.getAttribute('src'));
-        let ioImgClass = await page.$eval('`#io-lazy-img`', el => el.className);
+        let ioImgSrc = await page.$eval('#io-lazy-img', el => el.getAttribute('src'));
+        let ioImgClass = await page.$eval('#io-lazy-img', el => el.className);
         console.log(`IO Image src: ${ioImgSrc || 'null'}`);
         console.log(`IO Image class: ${ioImgClass}`);
         if (ioImgSrc !== null || ioImgClass.includes('lazy-loaded')) {
@@ -29,8 +27,8 @@ async function runTests() {
         }
 
         // Check IntersectionObserver background
-        let ioBgStyle = await page.$eval('`#io-lazy-bg`', el => el.style.backgroundImage);
-        let ioBgClass = await page.$eval('`#io-lazy-bg`', el => el.className);
+        let ioBgStyle = await page.$eval('#io-lazy-bg', el => el.style.backgroundImage);
+        let ioBgClass = await page.$eval('#io-lazy-bg', el => el.className);
         console.log(`IO Background style: ${ioBgStyle || 'empty'}`);
         if (ioBgStyle !== '' || ioBgClass.includes('lazy-loaded')) {
             console.error("❌ FAILED: IO background should not be loaded initially.");
@@ -57,8 +55,8 @@ async function runTests() {
         console.log("\n--- Checking state after scrolling ---");
 
         // Check IntersectionObserver image
-        ioImgSrc = await page.$eval('`#io-lazy-img`', el => el.getAttribute('src'));
-        ioImgClass = await page.$eval('`#io-lazy-img`', el => el.className);
+        ioImgSrc = await page.$eval('#io-lazy-img', el => el.getAttribute('src'));
+        ioImgClass = await page.$eval('#io-lazy-img', el => el.className);
         console.log(`IO Image src after scroll: ${ioImgSrc}`);
         console.log(`IO Image class after scroll: ${ioImgClass}`);
         if (!ioImgSrc || !ioImgClass.includes('lazy-loaded')) {
@@ -69,8 +67,8 @@ async function runTests() {
         }
 
         // Check IntersectionObserver background
-        ioBgStyle = await page.$eval('`#io-lazy-bg`', el => el.style.backgroundImage);
-        ioBgClass = await page.$eval('`#io-lazy-bg`', el => el.className);
+        ioBgStyle = await page.$eval('#io-lazy-bg', el => el.style.backgroundImage);
+        ioBgClass = await page.$eval('#io-lazy-bg', el => el.className);
         console.log(`IO Background style after scroll: ${ioBgStyle}`);
         if (!ioBgStyle.includes('url') || !ioBgClass.includes('lazy-loaded')) {
             console.error("❌ FAILED: IO background should be loaded after scrolling.");
