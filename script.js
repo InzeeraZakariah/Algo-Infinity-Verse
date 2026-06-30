@@ -497,46 +497,61 @@ let currentProblem = null;
 // ==========================================
 // 1. SINGLE CENTRALIZED INITIALIZATION
 // ==========================================
+function safeInit(name, fn, feature) {
+  try {
+    if (typeof fn === 'function') {
+      fn();
+    } else {
+      console.warn(`Initializer ${name} is not a function`);
+    }
+  } catch (err) {
+    console.error(`Error during ${name} initialization:`, err);
+    if (window.reportError) {
+      window.reportError(err, feature || name);
+    }
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   console.log('DOMContentLoaded fired, initializing app...');
-  loadUserData();
-  //initFlashcardsRevision();
+  safeInit('loadUserData', loadUserData);
+  //safeInit('initFlashcardsRevision', initFlashcardsRevision);
 
-  initLoadingScreen();
-  initNavbar();
-  initHeroSection();
-  initTopicsSection();
-  initQuizSection();
-  initPracticeSection();
-  initRoadmap();
-  initDashboard();
-  initGamification();
-  initChatbot();
-  initProfile();
-  initScrollEffects();
+  safeInit('initLoadingScreen', initLoadingScreen);
+  safeInit('initNavbar', initNavbar);
+  safeInit('initHeroSection', initHeroSection);
+  safeInit('initTopicsSection', initTopicsSection, 'topics');
+  safeInit('initQuizSection', initQuizSection, 'quiz');
+  safeInit('initPracticeSection', initPracticeSection, 'practice');
+  safeInit('initRoadmap', initRoadmap, 'roadmap');
+  safeInit('initDashboard', initDashboard, 'dashboard');
+  safeInit('initGamification', initGamification, 'gamification');
+  safeInit('initChatbot', initChatbot, 'chatbot');
+  safeInit('initProfile', initProfile, 'profile');
+  safeInit('initScrollEffects', initScrollEffects);
   console.log('App initialization complete');
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadUserData();
-  initLoadingScreen();
-  initNavbar();
-  initHeroSection();
-  initTopicOfTheDay();
-  initTopicsSection();
-  initQuizSection();
-  initPracticeSection();
-  initRoadmap();
-  initDashboard();
-  initGamification();
-  initDailyChallenge();
-  initChatbot();
-  initProfile();
-  initAiInterviewer();
-  initNewsletterValidation();
-  initScrollEffects();
-  initFooterCurrentDate();
-  updateProfile();
+  safeInit('loadUserData', loadUserData);
+  safeInit('initLoadingScreen', initLoadingScreen);
+  safeInit('initNavbar', initNavbar);
+  safeInit('initHeroSection', initHeroSection);
+  safeInit('initTopicOfTheDay', initTopicOfTheDay, 'topics');
+  safeInit('initTopicsSection', initTopicsSection, 'topics');
+  safeInit('initQuizSection', initQuizSection, 'quiz');
+  safeInit('initPracticeSection', initPracticeSection, 'practice');
+  safeInit('initRoadmap', initRoadmap, 'roadmap');
+  safeInit('initDashboard', initDashboard, 'dashboard');
+  safeInit('initGamification', initGamification, 'gamification');
+  safeInit('initDailyChallenge', initDailyChallenge, 'gamification');
+  safeInit('initChatbot', initChatbot, 'chatbot');
+  safeInit('initProfile', initProfile, 'profile');
+  safeInit('initAiInterviewer', initAiInterviewer, 'editor');
+  safeInit('initNewsletterValidation', initNewsletterValidation);
+  safeInit('initScrollEffects', initScrollEffects);
+  safeInit('initFooterCurrentDate', initFooterCurrentDate);
+  safeInit('updateProfile', updateProfile, 'profile');
 });
 
 // ============================================
@@ -1247,6 +1262,8 @@ function restoreQuizResults() {
 function initPracticeSection() {
   const problemsGrid = document.querySelector(".problems-grid");
   if (!problemsGrid) return;
+  if (problemsGrid.dataset.initialized) return;
+  problemsGrid.dataset.initialized = "true";
 
   // Notes modal
   const notesCloseBtn = document.getElementById("notesModalClose");
@@ -1319,15 +1336,12 @@ function initPracticeSection() {
       updateRecommendationStatus("Finding...", "loading", requestId);
 
       const res = await fetch("/api/recommendations/next", { signal });
-      if (requestId !== recommendationRequestCounter) return;
-
       if (res.status === 401) {
          alert("Please log in to get AI recommendations.");
          updateRecommendationStatus("Authentication required", "cancelled", requestId);
          return;
       }
       const data = await res.json();
-      if (requestId !== recommendationRequestCounter) return;
       
       if (data.success && data.recommendation) {
          const rec = data.recommendation;
@@ -1384,30 +1398,16 @@ function initPracticeSection() {
         aiRecommendDebounceTimer = null;
       }
 
-      let abortedActiveRequest = false;
-
       // Abort active request if any
       if (aiRecommendAbortController) {
-        abortedActiveRequest = true;
         aiRecommendAbortController.abort();
         aiRecommendAbortController = null;
         // Immediate status update to cancelled
         updateRecommendationStatus("Request cancelled", "cancelled", currentRequestId);
       }
 
-      const launchRecommendationRequest = () => {
-        startRecommendationRequest(currentRequestId, disableOnFetch);
-      };
-
       if (debounceDelay === 0) {
-        if (abortedActiveRequest) {
-          aiRecommendDebounceTimer = setTimeout(() => {
-            aiRecommendDebounceTimer = null;
-            launchRecommendationRequest();
-          }, 150);
-        } else {
-          launchRecommendationRequest();
-        }
+        startRecommendationRequest(currentRequestId, disableOnFetch);
       } else {
         updateRecommendationStatus("Waiting...", "waiting", currentRequestId);
         aiRecommendDebounceTimer = setTimeout(() => {
@@ -3963,6 +3963,7 @@ function showNextFact() {
 function showDailyFact() {
     const factText = document.getElementById('factText');
     const factDate = document.getElementById('factDate');
+    if (!factText || !factDate) return;
     
     factText.textContent = getDailyFact();
     const today = new Date().toLocaleDateString();
