@@ -149,11 +149,11 @@
 
               <!-- Code Viewer Tabs -->
               <div class="adt-code-tabs">
-                <div class="adt-tab-buttons">
-                  <button type="button" class="adt-tab-btn active" data-lang="js">
+                <div class="adt-tab-buttons" role="tablist" aria-label="Code language">
+                  <button type="button" class="adt-tab-btn active" data-lang="js" role="tab" aria-selected="true" aria-controls="adtCodeContent" id="adtTabJs">
                     <i class="fab fa-js"></i> JavaScript
                   </button>
-                  <button type="button" class="adt-tab-btn" data-lang="py">
+                  <button type="button" class="adt-tab-btn" data-lang="py" role="tab" aria-selected="false" aria-controls="adtCodeContent" id="adtTabPy">
                     <i class="fab fa-python"></i> Python
                   </button>
                 </div>
@@ -163,7 +163,7 @@
               </div>
 
               <!-- Code Box -->
-              <div class="adt-code-box">
+              <div class="adt-code-box" role="tabpanel" aria-labelledby="adtTabJs" tabindex="0">
                 <pre><code class="language-javascript" id="adtCodeContent"></code></pre>
               </div>
 

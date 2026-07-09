@@ -1378,11 +1378,11 @@ def build_lps(pattern):
     }
 
     trailContainer.classList.remove('hidden');
-    let html = `<div class="adt-trail-step" data-index="-1">Home</div>`;
+    let html = `<button type="button" class="adt-trail-step" data-index="-1">Home</button>`;
 
     pathHistory.forEach((step, idx) => {
       html += `<div class="adt-trail-arrow"><i class="fas fa-chevron-right"></i></div>`;
-      html += `<div class="adt-trail-step" data-index="${idx}">${step.choiceLabel}</div>`;
+      html += `<button type="button" class="adt-trail-step" data-index="${idx}">${step.choiceLabel}</button>`;
     });
 
     trailStepsEl.innerHTML = html;
