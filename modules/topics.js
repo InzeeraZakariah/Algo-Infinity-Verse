@@ -156,30 +156,15 @@ function saveUserProgress() {
 
 function getCompletedTopics() {
   const dsaTopics = window.dsaTopics || [];
-  const userProgress = getUserProgress();
-  const categoryMap = { Arrays: "arrays", Strings: "strings", "Linked List": "linkedlist", Trees: "trees", Graphs: "graphs", "Dynamic Programming": "dp" };
   return dsaTopics.filter(topic => {
-    const category = categoryMap[topic.name];
-    return category && userProgress.completedTopics && userProgress.completedTopics.includes(category);
+    const progress = getTopicProgress(topic.name);
+    return progress.percentage >= 100;
   });
-}
-
-/**
- * Get an array of topic objects that the user has fully completed (progress >= 100%).
- * Utilizes existing getUserProgress and the global dsaTopics array.
- */
-function getCompletedTopics() {
-    const progress = getUserProgress();
-    const all = window.dsaTopics || [];
-    return all.filter(topic => (progress[topic.id] || 0) >= 100);
 }
 
 // Export functions
 export { 
-    renderTopicCards, 
-    updateTopicProgress, 
     getTopicProgress, 
-    isTopicCompleted,
     getUserProgress,
     saveUserProgress,
     getCompletedTopics
