@@ -1,5 +1,18 @@
 import { renderBookmarkCollectionsPanel } from './bookmarkUI.js';
 
+function renderProfileAvatar(el, av) {
+  if (!el) return;
+  if (typeof av === 'string' && av.startsWith('data:image')) {
+    el.innerHTML = `<img src="${av}" alt="Avatar" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">`;
+    el.style.fontSize = '0';
+    return;
+  }
+  const initial = (av && av.initial) ? av.initial : 'L';
+  const bg = (av && av.bg) ? av.bg : '#7c3aed';
+  el.innerHTML = `<span style="display:inline-flex;align-items:center;justify-content:center;width:100%;height:100%;border-radius:50%;background:${bg};color:#fff;font-size:1.3rem;font-weight:600;font-family:'Poppins',sans-serif;">${initial}</span>`;
+  el.style.fontSize = '0';
+}
+
 export function initProfile() {
   window.initProfile = initProfile;
   const userProgress = window.userProgress || {};
@@ -36,9 +49,11 @@ export function initProfile() {
     });
   }
 
-  const avatarIcons = document.querySelectorAll('.avatar-icon');
-  avatarIcons.forEach(el => el.textContent = userProgress.avatar || '🚀');
-  const profileBio = document.getElementById('profileBio');
+ const avatarIcons = document.querySelectorAll('.avatar-icon');
+avatarIcons.forEach((el) => renderProfileAvatar(el, userProgress.avatar));
+
+const profileBio = document.getElementById('profileBio');
+
 if (profileBio) {
   if (userProgress.bio) {
     profileBio.textContent = userProgress.bio;
@@ -48,7 +63,6 @@ if (profileBio) {
     profileBio.classList.add('empty-state');
   }
 }
-  avatarIcons.forEach((el) => (el.textContent = userProgress.avatar || '🚀'));
 
   updateProfile();
   updateProfileLeaderboard();
@@ -210,7 +224,7 @@ export function updateProfile() {
 
   document
     .querySelectorAll('.avatar-icon')
-    .forEach((el) => (el.textContent = userProgress.avatar || '🚀'));
+    .forEach((el) => renderProfileAvatar(el, userProgress.avatar));
   updateLevelProgress();
   renderRecentActivity();
   renderSkillsMastery(); 
@@ -366,15 +380,24 @@ function updateProfileLeaderboard() {
 
 function renderProfileLeaderboardFallback(container) {
   const userProgress = window.userProgress || {};
-  const currentUser = {
-    id: 'local-user',
-    name: userProgress.name || 'Learner',
-    xp: userProgress.xp || 0,
-    level: userProgress.level || 1,
-    avatar: userProgress.avatar || '🚀',
-    rank: 1,
-  };
-  renderProfileLeaderboardEntries(container, [currentUser], 'local-user');
+
+  const mockLeaderboard = [
+    { id: 'bot-1', name: 'CodeNinja', xp: 12450, level: 5, avatar: 'C', rank: 1 },
+    { id: 'bot-2', name: 'AlgoMaster', xp: 9800, level: 4, avatar: 'A', rank: 2 },
+    { id: 'bot-3', name: 'ByteWizard', xp: 7200, level: 4, avatar: 'B', rank: 3 },
+    { id: 'bot-4', name: 'DevHero', xp: 5100, level: 3, avatar: 'D', rank: 4 },
+    { id: 'bot-5', name: 'PixelForge', xp: 3600, level: 3, avatar: 'P', rank: 5 },
+    {
+      id: 'local-user',
+      name: userProgress.name || 'Learner',
+      xp: userProgress.xp || 0,
+      level: userProgress.level || 1,
+      avatar: userProgress.avatar || '🚀',
+      rank: 6,
+    },
+  ];
+
+  renderProfileLeaderboardEntries(container, mockLeaderboard, 'local-user');
 }
 
 function renderProfileLeaderboardRows(container, leaders, currentUserId) {

@@ -12,7 +12,7 @@ import { instrumentJS } from '../../modules/code-tracer.js';
 
 const CLIENT_ERRORS_FILE = path.join(DATA_DIR, 'client_errors.json');
 const MAX_CLIENT_ERROR_ENTRIES = 1000;
-const MAX_STDIN_LENGTH = 10000;
+const MAX_STDIN_LENGTH = 5000;
 
 let executionWriteQueue = Promise.resolve();
 const EXECUTIONS_FILE = path.join(DATA_DIR, 'executions.json');
@@ -100,9 +100,7 @@ export async function getCsrfToken(req, res) {
 }
 
 export async function logError(req, res) {
-  if (
-    !applyRateLimit(req, res, logErrorLimiter, 'Too many error reports. Please try again later.')
-  ) {
+  if (!applyRateLimit(req, res, logErrorLimiter, 'Too many error reports. Please try again later.')) {
     return;
   }
   try {
@@ -336,11 +334,11 @@ export async function executeTracedCode(req, res) {
     let traceError = null;
 
     try {
-      await fs.writeFile(tmpFile, `${NETWORK_SANDBOX_PRELUDE}\n${instrumented}`, 'utf8');
+      await fs.writeFile(tmpFile, instrumented, 'utf8');
       await new Promise((resolve, reject) => {
         execFile(
           process.execPath,
-          [PERMISSION_FLAG, `--allow-fs-read=${tmpFile}`, tmpFile],
+          ['--experimental-permission', `--allow-fs-read=${tmpFile}`, tmpFile],
           {
             timeout: 10000,
             maxBuffer: 1024 * 1024,
@@ -380,7 +378,7 @@ export async function executeTracedCode(req, res) {
       traceError = execError.message;
       userOutput = `Execution error: ${traceError}`;
     } finally {
-      await fs.unlink(tmpFile).catch(() => {});
+      await fs.unlink(tmpFile).catch(() => { });
     }
 
     const executionId = uuidv4();
