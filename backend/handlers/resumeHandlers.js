@@ -31,15 +31,13 @@ export async function handleAnalyzeResume(req, res) {
       return sendJson(res, 400, { error: "No resume file uploaded." });
     }
 
-    const TIMEOUT_MS = 15000; // 15 seconds
-    const extractionPromise = extractResumeText(req.file);
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('Resume text extraction timed out.')), TIMEOUT_MS)
-    );
-
-    // Race the extraction against the timeout
-    const text = await Promise.race([extractionPromise, timeoutPromise]);
-
+    const text = await extractResumeText(req.file);
+    const MAX_RESUME_TEXT_LENGTH = 50000; // 50,000 characters is a safe limit
+    if (text.length > MAX_RESUME_TEXT_LENGTH) {
+      return sendJson(res, 400, {
+        error: `Resume text is too long (${text.length} characters). Please limit your resume text to ${MAX_RESUME_TEXT_LENGTH} characters.`
+      });
+    }
     const atsScore = calculateATS(text);
     const missingSkills = findMissingSkills(text);
     const suggestions = getSuggestions(atsScore);
