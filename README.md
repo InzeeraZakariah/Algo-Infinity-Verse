@@ -568,9 +568,10 @@ Be respectful and constructive. See our [Code of Conduct](CODE_OF_CONDUCT.md) fo
 
 ## Support
 
-- 📧 Email: opensource@algo-infinity-verse.org
+- 📧 Email: support@algoinfinityverse.com
+- 🔒 Security issues: security@algoinfinityverse.com (see [SECURITY.md](SECURITY.md))
 - 💬 Discord: [Join our server](https://discord.gg/algo-infinity)
-- 🐛 Report bugs via [GitHub Issues](https://github.com/Algo-Infinity-Verse/Algo-Infinity-Verse/issues)
+- 🐛 Report bugs via [GitHub Issues](https://github.com/Eshajha19/Algo-Infinity-Verse/issues)
 
 ---
 
