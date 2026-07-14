@@ -1021,6 +1021,11 @@ const visualizers = [
     desc: 'Spectre side-channel attack — speculative execution visualized.',
   },
   {
+    name: 'DNS Resolution Simulator',
+    path: '/pages/visualizers/dns-simulator/dns-simulator.html',
+    category: 'Systems & OS',
+    icon: 'fa-globe',
+    desc: 'Interactive simulator tracing recursive DNS queries.',
     name: 'Consistent Hashing Visualizer',
     path: '/pages/visualizers/consistent-hashing-simulator/consistent-hashing-simulator.html',
     category: 'Systems & OS',
