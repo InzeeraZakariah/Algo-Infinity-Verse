@@ -962,6 +962,9 @@
       <!-- Change Password Modal -->
       <div id="change-password-modal-placeholder"></div>
 
+      <!-- XP Store Modal -->
+      <div id="xp-store-placeholder"></div>
+
       <!-- Study Timer Section -->
       <div id="study-timer-placeholder"></div>
     </main>
@@ -1077,6 +1080,7 @@
           loadPartial('change-password-modal-placeholder', '/partials/change-password-modal.html'),
           loadPartial('study-timer-placeholder', '/partials/study-timer.html'),
           loadPartial('footer-placeholder', '/partials/footer.html'),
+          loadPartial('xp-store-placeholder', '/partials/xp-store-modal.html'),
         ];
         await Promise.all(partials);
         window.partialsLoadedFlag = true;

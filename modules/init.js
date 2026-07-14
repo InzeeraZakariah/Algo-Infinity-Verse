@@ -25,6 +25,7 @@ import { initEditor } from './editor.js';
 import { initMistakeDna } from './mistake-dna.js';
 import { initPersonalityQuiz } from './personality-quiz.js';
 import { initBookmarkCollections } from './bookmarkUI.js';
+import { initStoreModal } from './xpStore.js';
 
 function loadUserData() {
   if (typeof window.loadUserData === 'function') {
@@ -127,6 +128,7 @@ function initializeApp() {
   initEditor();
   initMistakeDna();
   initPersonalityQuiz();
+  initStoreModal();
 }
 
 if (window.partialsLoadedFlag) {
