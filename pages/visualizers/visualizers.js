@@ -85,6 +85,13 @@ const visualizers = [
     desc: 'Interactive binary search with divide-and-conquer visualization.',
   },
   {
+    name: 'Binary Search Boundary Finder',
+    path: '/pages/visualizers/binary-search-boundaries/binary-search-boundaries.html',
+    category: 'Sorting & Searching',
+    icon: 'fa-arrows-to-dot',
+    desc: 'Compare leftmost, rightmost, and insert-position binary search side-by-side with lo/hi/mid and mid±1 rules.',
+  },
+  {
     name: 'Fast/Slow Pointer Simulator',
     path: '/pages/visualizers/fast-slow-pointer-simulator/fast-slow-pointer-simulator.html',
     category: 'Sorting & Searching',
