@@ -4,6 +4,11 @@
 
 const visualizers = [
   {
+    name: 'Distributed Tracing Simulator',
+    path: '/pages/visualizers/distributed-tracing/distributed-tracing.html',
+    category: 'Distributed Systems',
+    icon: 'fa-project-diagram',
+    desc: 'Simulate Jaeger/OpenTelemetry span propagation across microservices.',
     name: 'OAuth 2.0 PKCE Sandbox',
     path: '/pages/visualizers/oauth-pkce-sandbox/oauth-pkce-sandbox.html',
     category: 'Security & Crypto',
