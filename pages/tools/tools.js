@@ -22,6 +22,7 @@ const practiceTools = [
 
   // ── Learning Tools ──
   { name: "Spaced Repetition Queue", path: "/pages/tools/spaced-repetition/review-queue.html", category: "Learning Tools", icon: "fa-rotate", desc: "Optimized review queue using SM-2 spaced repetition to maximize long-term retention." },
+  { name: "DSA Focus Pomodoro", path: "/pages/tools/dsa-focus-timer/dsa-focus-timer.html", category: "Learning Tools", icon: "fa-clock", desc: "Topic-linked 25/5 pomodoro with DSA tags, localStorage session history, and study analytics." },
   { name: "AI Memory Scanner", path: "/pages/tools/memory-scanner/memory-scanner.html", category: "Learning Tools", icon: "fa-magnifying-glass", desc: "Scan your memory gaps and get personalized recommendations for topics to revisit." },
   { name: "My Notes & Mnemonics", path: "/pages/tools/my-notes/my-notes.html", category: "Learning Tools", icon: "fa-note-sticky", desc: "Create, organize, and review personal notes and mnemonics for DSA concepts." },
   { name: "Wrong Turn Replay", path: "/pages/tools/wrong-turn-replay/wrong-turn-replay.html", category: "Learning Tools", icon: "fa-rotate-left", desc: "Replay your incorrect solution attempts to understand where you went wrong." },
