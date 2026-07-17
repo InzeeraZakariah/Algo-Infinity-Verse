@@ -40,6 +40,26 @@ export function initKeyboardShortcuts() {
       e.preventDefault();
       window.location.href = '#dashboard';
     }
+    if (
+      e.key === '/' &&
+      !isEditing &&
+      !e.ctrlKey &&
+      !e.metaKey &&
+      !e.altKey
+    ) {
+      e.preventDefault();
+      const navSearch = document.getElementById('navSearchDesktop');
+      const searchInput = navSearch?.querySelector('.nav-search-input');
+      if (navSearch && searchInput) {
+        if (!navSearch.classList.contains('expanded')) {
+          navSearch.classList.add('expanded');
+        }
+        setTimeout(() => {
+          searchInput.focus();
+          searchInput.select();
+        }, 250);
+      }
+    }
     if (e.key === 'Escape') {
       closeShortcutModal();
     }
