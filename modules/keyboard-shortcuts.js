@@ -12,6 +12,9 @@ export function initKeyboardShortcuts() {
   }
 
   document.addEventListener('keydown', function(e) {
+    const tag = e.target.tagName;
+    const isEditing = tag === 'INPUT' || tag === 'TEXTAREA' || e.target.isContentEditable;
+
     if (e.ctrlKey && e.key === 'k') {
       e.preventDefault();
       const searchInput = document.getElementById('searchInput');
@@ -40,7 +43,8 @@ export function initKeyboardShortcuts() {
     if (e.key === 'Escape') {
       closeShortcutModal();
     }
-    if (e.key === '?') {
+    if (e.key === '?' && !isEditing) {
+      e.preventDefault();
       toggleShortcutModal();
     }
   });
