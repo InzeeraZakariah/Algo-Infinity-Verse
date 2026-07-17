@@ -61,7 +61,10 @@ export function initKeyboardShortcuts() {
       }
     }
     if (e.key === 'Escape') {
-      closeShortcutModal();
+      const modal = document.getElementById('shortcutsModal');
+      if (modal && modal.style.display !== 'none') {
+        closeShortcutModal();
+      }
     }
     if (e.key === '?' && !isEditing) {
       e.preventDefault();
