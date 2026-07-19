@@ -46,6 +46,7 @@ const practiceTools = [
   { name: "Learning Insights Dashboard", path: "/pages/tools/learning-insights-dashboard/learning-insights-dashboard.html", category: "Dashboards", icon: "fa-lightbulb", desc: "Actionable insights on your learning patterns, strengths, and areas needing focus." },
   { name: "Weakness Dashboard", path: "/pages/tools/topic-weakness-dashboard/topic-weakness-dashboard.html", category: "Dashboards", icon: "fa-triangle-exclamation", desc: "Identify your weakest DSA topics with detailed performance breakdowns and recommendations." },
   { name: "Personalized Learning Path", path: "/pages/tools/personalized-learning-path/personalized-learning-path.html", category: "Dashboards", icon: "fa-route", desc: "Generate a custom learning path based on your current skill level and target goals." },
+  { name: "Weekly DSA Study Plan", path: "/pages/tools/weekly-study-plan/weekly-study-plan.html", category: "Dashboards", icon: "fa-calendar-week", desc: "Hours/week + weak topics + interview date → auto 7-day plan with quiz/visualizer deep links and localStorage XP hooks." },
 
   // ── Simulators ──
   { name: "Algorithm Arena", path: "/pages/tools/algorithm-arena/algorithm-arena.html", category: "Simulators", icon: "fa-gamepad", desc: "Pit algorithms against each other in head-to-head performance battles." },
